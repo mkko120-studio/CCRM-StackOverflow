@@ -2,8 +2,9 @@
     --primary: #e0fbfc;
     --secondary: #c2dfe3;
     --accent: #9db4c0;
-    --dark: #5c6b73;
+    --annotation: #5c6b73;
     --background: #253237;
+    --background-light: #2b3940;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -24,23 +25,33 @@ html {
 
 body {margin: 0 !important;}
 
+::-webkit-scrollbar {
+    width: 0.5em;
+    background-color: rgba(0,0,0,0);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--annotation);
+}
+
 .container {
     max-width: 90vw;
     margin: 0 auto;
 }
 @media screen and (min-width: 1000px) {
     .container {
-        background: green;
+
     }
 }
 @media screen and (max-width: 1000px) {
      .container {
-         background: yellow;
+
+
      }
  }
-@media screen and (max-width: 400px) {
-    .container {
-        background: red;
+
+@media screen and (min-width: 600px) {
+    ::-webkit-scrollbar {
+        width: 0.75rem;
     }
 }
 
