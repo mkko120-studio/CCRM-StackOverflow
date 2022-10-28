@@ -11,7 +11,7 @@
 
     let time = new Date()
     $: date = `${time.getDate()}.${time.getMonth().toString().length < 2 ? "0"+time.getMonth() : time.getMonth()}.${time.getFullYear()},
-     godzina ${time.getHours()}:${time.getMinutes().toString().length < 2 ? "0"+time.getMinutes() : time.getMinutes()}:${time.getSeconds()}`
+     godzina ${time.getHours().toString().length < 2 ? "0"+time.getHours() : time.getHours()}:${time.getMinutes().toString().length < 2 ? "0"+time.getMinutes() : time.getMinutes()}:${time.getSeconds().toString().length < 2 ? "0"+time.getSeconds() : time.getSeconds()}`
     onMount(() => {
         setInterval(() => {
             time = new Date();
@@ -19,11 +19,23 @@
     })
 
     const showMenu = () => {
-        document.getElementById("menu").style.transform = "translateX(0)"
+        document.getElementById("menu").style.display = "block";
+        setTimeout( () => {
+                    document.getElementById("menu").style.transform = "translateX(0)"
+        }, 1);
+        setTimeout( () => {
+            document.getElementById("menu-fit").style.display = "block";
+        }, 80);
+
     }
 
     const hideMenu = () => {
         document.getElementById("menu").style.transform = "translateX(80vw)"
+        setTimeout(() => {
+            document.getElementById("menu").style.display = "none"
+        }, 250);
+        document.getElementById("menu-fit").style.display = "none"
+
     }
 
     // alert(`${screen.width}x${screen.height}y`)
@@ -38,6 +50,8 @@
         <div class="menu-button">
             <button on:click="{() => showMenu()}" class="hamburger">Hej</button>
         </div>
+
+        <div id="menu-fit"></div>
 
         <div id="menu">
             <h1>Hello</h1>
@@ -70,8 +84,11 @@
 <style>
 
     #menu {
+        z-index: 2;
+        display: none;
         height: 100%;
         position: fixed;
+        overflow: clip;
         right: 0;
         top: 0;
         width: 70vw;
@@ -81,12 +98,25 @@
         transition: transform 250ms ease-in-out;
     }
 
+    #menu-fit {
+        z-index: 1;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 80vw;
+        background: rgba(0,0,0,0.3);
+
+    }
+
     .hamburger {
         position: absolute;
         margin-top: 20px;
         margin-right: 20px;
         top: 0;
         right: 0;
+        color: var(--annotation)
     }
 
    .welcome-box h3 {
