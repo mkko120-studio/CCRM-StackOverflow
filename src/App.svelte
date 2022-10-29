@@ -11,8 +11,9 @@
     <Navbar />
     <Router url="{url}">
         {#each routes as route, index}
-            <Route index="{index}" path="{route.path}" component="{route.component}" />
+            <Route index="{index}" path="{route.path}" component="{route.component}" title="{route.name}" />
         {/each}
+        <Route component="{e404}" />
     </Router>
 
 </main>

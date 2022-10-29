@@ -21,9 +21,12 @@
 
 html {
     background-color: var(--background);
+    overflow: hidden;
 }
 
-body {margin: 0 !important;}
+body {
+    margin: 0 !important;
+}
 
 ::-webkit-scrollbar {
     width: 0.5em;
@@ -35,6 +38,7 @@ body {margin: 0 !important;}
 
 .container {
     max-width: 90vw;
+    min-width: 400px;
     margin: 0 auto;
 }
 @media screen and (min-width: 1000px) {

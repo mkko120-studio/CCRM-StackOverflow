@@ -1,10 +1,13 @@
 <script lang="ts">
 
     import {onMount} from "svelte";
-    import {Link} from "svelte-routing"
+    import {Link} from "svelte-routing";
 
     export let location;
     export let index;
+    export let title;
+
+    document.title = title;
 
     console.log(location)
     console.log(index)
@@ -20,12 +23,14 @@
 
     const showMenu = () => {
         document.getElementById("menu").style.display = "block";
+
         setTimeout( () => {
                     document.getElementById("menu").style.transform = "translateX(0)"
         }, 1);
         setTimeout( () => {
             document.getElementById("menu-fit").style.display = "block";
-        }, 80);
+        }, 100);
+
 
     }
 
@@ -48,14 +53,25 @@
     <div class="container">
 
         <div class="menu-button">
-            <button on:click="{() => showMenu()}" class="hamburger">Hej</button>
+            <img src="./hamburger.svg" on:click="{() => showMenu()}" class="hamburger" style="fill: var(--secondary);"/>
         </div>
 
         <div id="menu-fit"></div>
 
         <div id="menu">
-            <h1>Hello</h1>
-            <button on:click={() => hideMenu()} class="hamburger">Hej</button>
+            <h1>Menu</h1>
+            <div class="menu-button">
+                <img src="./close.svg" on:click={() => hideMenu()} class="hamburger" />
+            </div>
+            <hr>
+            <ul>
+                <li>Odczytaj kod</li>
+                <li>Dodaj produkt</li>
+                <li>Zarządzaj inwentarzem</li>
+                <li>Katalog inwentarza</li>
+                <li>Ustawienia</li>
+                <li style="color: red;">Wyloguj się</li>
+            </ul>
         </div>
 
         <div class="welcome-box">
@@ -68,10 +84,10 @@
                 <Link style="text-decoration: none" to="/new"><h4>Odczytaj kod</h4></Link>
             </div>
             <div class="flexbox-item">
-                <Link style="text-decoration: none" to="/manage"><h4>Zarządzanie produktami</h4></Link>
+                <Link style="text-decoration: none" to="/manage"><h4>Zarządzanie inwentarzem</h4></Link>
             </div>
             <div class="flexbox-item">
-                <Link style="text-decoration: none" to="/list"><h4>Katalog produktów</h4></Link>
+                <Link style="text-decoration: none" to="/list"><h4>Katalog inwentarza</h4></Link>
             </div>
             <div class="flexbox-item">
                 <Link style="text-decoration: none" to="/settings"><h4>Ustawienia</h4></Link>
@@ -91,11 +107,32 @@
         overflow: clip;
         right: 0;
         top: 0;
-        width: 70vw;
+        width: 25vw;
         background: var(--background);
         padding: 20px;
-        transform: translateX(80vw);
+        transform: translateX(25vw);
         transition: transform 250ms ease-in-out;
+    }
+
+    .menu-button img {
+        height: 3rem;
+        width: 3rem;
+    }
+
+    #menu h1 {
+        margin-left: 10px;
+    }
+
+    #menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #menu li {
+        margin: 10px 20px;
+        padding: 10px;
+        font-size: 20px;
     }
 
     #menu-fit {
@@ -118,7 +155,6 @@
         right: 0;
         color: var(--annotation)
     }
-
    .welcome-box h3 {
        color: var(--accent);
        margin-top: 0.5em !important;
@@ -157,7 +193,27 @@
        color: var(--secondary)
    }
 
+    @media only screen and (max-width: 1400px) {
+        #menu {
+            width: 40vw;
+            transform: translateX(40vw);
+        }
+
+        .content-flex {
+            flex-wrap: wrap;
+        }
+        .flexbox-item {
+            flex: 40%;
+            width: 50%;
+            height: 15vh;
+        }
+    }
+
    @media only screen and (max-width: 800px) {
+       #menu {
+           width: 70vw;
+           transform: translateX(70vw);
+       }
        .content-flex {
            flex-wrap: wrap;
        }
@@ -168,15 +224,6 @@
        }
    }
 
-   @media only screen and (max-width: 1400px) {
-       .content-flex {
-           flex-wrap: wrap;
-       }
-       .flexbox-item {
-           flex: 40%;
-           width: 50%;
-           height: 15vh;
-       }
-   }
+
 
 </style>
