@@ -2,6 +2,7 @@
     import {onMount} from "svelte";
     import {BrowserCodeReader, BrowserMultiFormatReader} from "@zxing/browser";
     import util from '../util/util'
+    import formutil from "../util/formutil";
 
 
     let videoInput = navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(async () => await BrowserCodeReader.listVideoInputDevices());
@@ -12,15 +13,17 @@
     })
 
     const submitForm = (e) => {
-        // TODO do form submission
         const formData = new FormData(e.target)
 
         const data = {};
         for (let field of formData) {
+
+            // formData = { field, field, ...field };
+            // field = { 0: key, 1: value };
             // data[key] = value;
             data[field[0]] = field[1];
         }
-        util.clog(data)
+        formutil.insertNewItemIntoDatabase(data)
     }
 
     const selectVideoInput = async (devID) => {
