@@ -45,6 +45,10 @@
 
     // alert(`${screen.width}x${screen.height}y`)
 
+    let style = {
+        textDecoration: "none"
+    }
+
 
 </script>
 
@@ -81,7 +85,7 @@
 
         <div class="content-flex">
             <div class="flexbox-item">
-                <Link style="text-decoration: none" to="/new"><h4>Odczytaj kod</h4></Link>
+                <Link style={style} to="/new"><h4>Odczytaj kod</h4></Link>
             </div>
             <div class="flexbox-item">
                 <Link style="text-decoration: none" to="/manage"><h4>Zarządzanie inwentarzem</h4></Link>
@@ -190,7 +194,18 @@
    }
 
    .flexbox-item * {
-       color: var(--secondary)
+       color: var(--secondary);
+   }
+
+   .flexbox-item > :global(a) {
+       text-decoration: none;
+       width: 100%;
+       height: 100%;
+
+       position: relative;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -22%);
    }
 
     @media only screen and (max-width: 1400px) {

@@ -17,6 +17,9 @@ const routes = [
         name: "404",
         path: '/404',
         component: e404
+    },
+    {
+        name: ""
     }
 ]
 
