@@ -1,6 +1,7 @@
 import MainPage from "../views/MainPage.svelte";
 import e404 from "../views/404.svelte";
 import NewItem from "../views/NewItem.svelte";
+import ItemView from "../views/ItemView.svelte";
 
 const routes = [
     {
@@ -14,13 +15,16 @@ const routes = [
         component: NewItem
     },
     {
+        name: "Item View",
+        path: "/manage",
+        component: ItemView
+    }
+    ,{
         name: "404",
         path: '/404',
         component: e404
-    },
-    {
-        name: ""
     }
+
 ]
 
 export default routes;

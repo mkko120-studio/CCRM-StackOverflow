@@ -109,4 +109,18 @@
         right: 0;
         color: var(--annotation)
     }
+
+    @media only screen and (max-width: 1400px) {
+        #menu {
+            width: 40vw;
+            transform: translateX(40vw);
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+        #menu {
+            width: 70vw;
+            transform: translateX(70vw);
+        }
+    }
 </style>

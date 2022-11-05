@@ -18,7 +18,7 @@ import {
 
 
 import type DatabaseOptions from "./interfaces/DatabaseOptions";
-import type {QueryArgs} from "./interfaces/QuerryType";
+import type {QueryArgs, SelectArgs} from "./interfaces/QuerryType";
 
 
 /**
@@ -81,19 +81,19 @@ class DB {
 
             return null;
         },
-        select(): Promise<any> {
+        select(...args: SelectArgs): Promise<any> {
 
             return null;
         },
         query(...args: QueryArgs): Promise<any> {
-
            if (args.length > 2) {
 
+               return null;
            } else {
 
-           }
 
-            return null;
+               return null;
+           }
         }
     }
 

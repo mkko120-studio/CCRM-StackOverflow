@@ -58,3 +58,8 @@ body {
     }
 }
 
+
+/*Table Style*/
+.select {
+    background: var(--background);
+}
