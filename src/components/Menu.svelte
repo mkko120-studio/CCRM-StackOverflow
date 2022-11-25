@@ -8,7 +8,7 @@
         }, 1);
         setTimeout( () => {
             document.getElementById("menu-fit").style.display = "block";
-        }, 100);
+        }, 50);
 
 
     }
@@ -17,7 +17,7 @@
         document.getElementById("menu").style.transform = "translateX(80vw)"
         setTimeout(() => {
             document.getElementById("menu").style.display = "none"
-        }, 250);
+        }, 100);
         document.getElementById("menu-fit").style.display = "none"
 
     }

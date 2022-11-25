@@ -4,6 +4,9 @@
     import util from '../util/util'
     import formutil from "../util/formutil";
 
+    export let title;
+    document.title = title;
+
 
     let videoInput = navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(async () => await BrowserCodeReader.listVideoInputDevices());
     const codeReader = new BrowserMultiFormatReader();
