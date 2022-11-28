@@ -1,5 +1,24 @@
 <script lang="ts">
 
+    let previousUrl = "";
+
+    const observer = new MutationObserver(() => {
+        if (window.location.pathname !== previousUrl) {
+            previousUrl = window.location.pathname;
+            console.log("URL changed to: " + previousUrl);
+            if (previousUrl !== "/") {
+                document.getElementById("arrowmenu").style.display = "block";
+            } else {
+                document.getElementById("arrowmenu").style.display = "none";
+            }
+        }
+    });
+    const config = { subtree: true, childList: true };
+
+    // start observing change
+    observer.observe(document, config);
+
+
     const showMenu = () => {
         document.getElementById("menu").style.display = "block";
 
@@ -26,32 +45,60 @@
 
 <main>
 
-    <div class="menu-button">
-        <img src="./hamburger.svg" on:click="{() => showMenu()}" class="hamburger" style="fill: var(--secondary);"/>
+<!--    Menu-->
+    <div class="hamburger-menu">
+         <div class="menu-button">
+             <img src="./hamburger.svg" alt="=" on:click="{() => showMenu()}" class="hamburger" style="fill: var(--secondary);" />
+         </div>
+
+        <div id="menu-fit"></div>
+
+        <div id="menu">
+            <h1>Menu</h1>
+            <div class="menu-button">
+                <img src="./close.svg" on:click={() => hideMenu()} class="hamburger" />
+            </div>
+            <hr>
+            <ul>
+                <li>Strona główna</li>
+                <li>Odczytaj kod</li>
+                <li>Dodaj produkt</li>
+                <li>Zarządzaj inwentarzem</li>
+                <li>Katalog inwentarza</li>
+                <li>Ustawienia</li>
+                <li style="color: red;">Wyloguj się</li>
+            </ul>
+        </div>
     </div>
 
-    <div id="menu-fit"></div>
+<!--    Arrow back-->
 
-    <div id="menu">
-        <h1>Menu</h1>
-        <div class="menu-button">
-            <img src="./close.svg" on:click={() => hideMenu()} class="hamburger" />
+    <div class="arrow-menu" id="arrowmenu">
+        <div class="arrow-button">
+            <img src="./arrow.svg" alt="<" on:click={() => history.back()} class="arrow" style="fill: var(--secondary)" />
         </div>
-        <hr>
-        <ul>
-            <li>Strona główna</li>
-            <li>Odczytaj kod</li>
-            <li>Dodaj produkt</li>
-            <li>Zarządzaj inwentarzem</li>
-            <li>Katalog inwentarza</li>
-            <li>Ustawienia</li>
-            <li style="color: red;">Wyloguj się</li>
-        </ul>
     </div>
 
 </main>
 
 <style>
+
+    .arrow-menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 25vw;
+        height: 25vw;
+        padding: 20px
+    }
+
+    .arrow-button, .arrow-button img {
+        cursor: pointer;
+        height: 3rem;
+        width: 3rem;
+    }
+
+
     #menu {
         z-index: 2;
         display: none;
@@ -92,19 +139,20 @@
     #menu-fit {
         z-index: 1;
         display: none;
-        position: absolute;
+        position: fixed;
+        overflow: clip;
         top: 0;
         left: 0;
-        height: 100vh;
+        height: 1000%;
         width: 80vw;
         background: rgba(0,0,0,0.3);
 
     }
 
     .menu-button {
-        position: absolute;
-        margin-top: 20px;
-        margin-right: 20px;
+        position: fixed;
+        background-color: var(--background);
+        padding: 20px 20px 10px 5px;
         top: 0;
         right: 0;
         color: var(--annotation)
