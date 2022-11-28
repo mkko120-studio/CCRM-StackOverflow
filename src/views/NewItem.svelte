@@ -8,12 +8,14 @@
     document.title = title;
 
 
-    let videoInput = navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(async () => await BrowserCodeReader.listVideoInputDevices());
+    let videoInput = BrowserCodeReader.listVideoInputDevices();
+    console.log(videoInput)
     const codeReader = new BrowserMultiFormatReader();
     let select: HTMLSelectElement;
     onMount(() => {
         select = <HTMLSelectElement>document.getElementById("camera");
     })
+    let controlls;
 
     const submitForm = (e) => {
         const formData = new FormData(e.target)
@@ -34,6 +36,12 @@
         elem.style.display = "block";
 
         await codeReader.decodeFromVideoDevice(devID, elem, (result, error, controls) => {
+            setTimeout(() => {
+                //@ts-ignore
+                document.getElementById("decoded").value = result.getText();
+                elem.style.display = "none";
+                controls.stop()
+            }, 10000);
             if (error) {
                 return
             }
@@ -53,10 +61,6 @@
             return null;
         }
     }
-
-
-
-
 
 </script>
 
